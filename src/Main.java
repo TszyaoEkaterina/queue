@@ -1,21 +1,29 @@
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import java.util.*;
 
 public class Main {
     public static void main(String[] args) {
-        System.out.println(generateClients());
+        Queue<Person> queue = new LinkedList<>();
+        queue.addAll(generateClients());
+        while (!queue.isEmpty()) {
+            Person client = queue.poll();
+            client.useTicket();
+            System.out.println(client.getName() + " "
+                    + client.getSurname() + " прокатился на аттракционе");
+            if (client.getTickets() != 0) {
+                queue.offer(client);
+            }
+        }
     }
 
 
     public static List<Person> generateClients() {
-        Person petya = new Person("Petya","Fedorov",1);
-        Person victor = new Person("Victor" ,"Sorokin",3);
-        Person lyuba = new Person("Lyuba","Lebedeva",2);
-        Person sofia = new Person("Sofia","Romanova",5);
-        Person artur = new Person("Artur","Romanov",5);
-        ArrayList<Person> people = new ArrayList<Person>(Arrays.asList(petya,
-                victor,lyuba,sofia,artur));
+        Person denis = new Person("Денис", "Андреев", 1);
+        Person george = new Person("Георгий", "Николаев", 3);
+        Person timothy = new Person("Тимофей", "Давыдов", 2);
+        Person koctza = new Person("Константин", "Герасимов", 5);
+        Person artur = new Person("Артур", "Романов", 5);
+        LinkedList<Person> people = new LinkedList<Person>(Arrays.asList(denis,
+                george, timothy, koctza, artur));
         return people;
     }
 }
